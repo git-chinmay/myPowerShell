@@ -38,7 +38,7 @@ $source_file_count = Get-ChildItem -Path $source_location
 $desti_file_count = Get-ChildItem -Path $destination_location
 
 if ($source_file_count.count -eq $desti_file_count.count) {
-    write-output "$(Get-TimeStamp) All folders copied"
+    write-output "$(Get-TimeStamp) All folders copied" | Out-File $logfile_location -Append
     $wshell.Popup("Autocopy completed", 10, "Gdrive to Onedrive AutoCopy", 64)
 }
 else {
