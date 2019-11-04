@@ -1,0 +1,32 @@
+PowerShell Script:-
+
+function SkypeProcess()
+{
+    try{
+        
+        if(get-process -name "Lync" -ErrorAction SilentlyContinue)
+        {
+            $p = get-process -name "Lync"
+            stop-process $p
+            write-host "Skype process cleared" -ForegroundColor Yellow
+        }
+        else{write-host ""}
+        
+    }
+    catch {"No Skype process running: $_" }
+}
+
+while (get-process -name "Lync" -ErrorAction SilentlyContinue){
+    SkypeProcess
+}
+
+write-host "All Skype related process cleared" -ForegroundColor Green
+
+
+BAT File:-
+@ECHO OFF
+PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command "& '%~dpn0.ps1'"
+PAUSE
+
+
+NOTE:- Both powershell and BAT file should be present in same directory and both filenames should be same otherwise it will fail.
